@@ -1,0 +1,8 @@
+{
+  "name": "MealMe",
+  "version": "1.0.0",
+  "description": "Pizza ordering realtime website",
+  "main": "index.js",
+  "author": "Devesh Sanjay Narkhede",
+  "license": "MIT"
+}
