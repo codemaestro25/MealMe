@@ -1,0 +1,58 @@
+@import "./variables" ;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+body {
+    font-family: ('Lato'), sans-serif;
+    
+    color: $dark;
+}
+
+nav li:last-child a {
+    background: $primary;
+}
+
+nav li:last-child a:hover{
+    background: $primary-hover;
+}
+nav li a{
+    transition: $smooth;
+    &:hover{
+        color: $primary;
+    }
+}
+
+section.hero {
+    background: $secondary;
+}
+.size{
+    background: $secondary;
+}
+.addToCart{
+    background-color: $primary;
+    color: $pure;
+    border: 2px solid $pure;
+}
+.addToCart:hover{
+    transition: $smooth;
+    background-color: $pure;
+    color: $primary;
+    border: 2px solid $primary;
+}
+
+.btn-primary{
+    background: $primary;
+}
+.btn-primary:hover{
+    transition: $smooth;
+    background: $primary-hover;
+}
+section.cart{
+    background: $secondary;
+    .amount{
+        color: $primary;
+    }
+
+}
