@@ -41,10 +41,11 @@ section.hero {
     color: $primary;
     border: 2px solid $primary;
 }
-
 .btn-primary{
-    background: $primary;
-}
+        
+        background: $primary;
+    }
+
 .btn-primary:hover{
     transition: $smooth;
     background: $primary-hover;
@@ -55,4 +56,15 @@ section.cart{
         color: $primary;
     }
 
+}
+section.login{
+    a:hover{
+        color:$primary-hover;
+    }
+}
+section.register{
+    a:hover{
+        color:$primary-hover;
+    }
+    
 }

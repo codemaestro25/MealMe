@@ -17,21 +17,9 @@ app.set('views', path.join(__dirname, '/resources/views')); //telling express wh
 app.set('view engine', 'ejs')
 
 // make sure that all your routes are placed after the above block only , or else it will create render issues
-app.get('/', (req, res)=>{
-    res.render("home");//home.ejs in views folder
-})
 
-app.get('/cart',(req,res)=>{
-    res.render('customers/cart')
-})
+require('./routes/web')(app) // here '(app)' this means we are calling the the function initRoutes(app) present in web.js and pass the instance of app which is our express app to the function
 
-app.get('/login', (req,res)=>{
-    res.render('auth/login')
-})
-
-app.get('/register', (req,res)=>{
-    res.render('auth/register')
-})
 
 app.listen(PORT , ()=>{
     console.log(`Listening on PORT ${PORT}`)
