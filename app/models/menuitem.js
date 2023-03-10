@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema //here has 'S' as capital because we are assigning class fucntion to it 
+const Schema = mongoose.Schema //here has 'S' as capital because we are assigning class or constructor function to it 
 
 const menuSchema = new Schema({
     name:{type:String, requried: true},

@@ -34,11 +34,11 @@
           >
           <div class="flex items-center justify-around mt-6">
             <span class="font-bold text-lg">₹<%= pizzaitem.price%></span>
-            <button
+            <button data-pizza="<%= JSON.stringify(pizzaitem)%>"
               class="addToCart px-6 py-1 rounded-full flex items-center font-bold"
             >
               <span> + Add </span>
-            </button>
+            </button><!-- here data-pizza is a data attribute where pizza is the name given to pizza attribute-->
           </div>
         </div>
       </div>
