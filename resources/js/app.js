@@ -1,6 +1,6 @@
 // client side code
 import axios from "axios";//we use axios for making http request from the browser
-import session from "express-session";
+import Noty from 'noty'
 // getting all the addd to cart buttons from home page
 let addToCart = document.querySelectorAll('.addToCart');
 let cartCounter = document.querySelector('#cartCounter');
@@ -8,7 +8,18 @@ let cartCounter = document.querySelector('#cartCounter');
 function updateCart(pizza){
     axios.post('/update-cart', pizza).then(res=>{
         cartCounter.innerText = res.data.totalQty;
+        new Noty({
+            type: 'success',
+            text:"Item added to cart",
+            timeout: 1000
+        }).show();
         console.log(res)
+    }).catch(err=>{
+        new Noty({
+            text: 'error',  
+            text:'Something went wrong :(',
+            timeout:1000
+        }).show();
     })
 }
 

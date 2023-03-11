@@ -26,6 +26,7 @@
   "express-session": "^1.17.3",
   "mongoose": "^7.0.0",
   "node-polyfill-webpack-plugin": "^2.0.1",
+  "noty": "^3.2.0-beta-deprecated",
   "stream": "^0.0.2",
   "stream-browserify": "^3.0.0"
  },
