@@ -45,7 +45,7 @@ section.hero {
 }
 .btn-primary{
         
-        background: $primary;
+        background: $primary !important;
     }
 
 .btn-primary:hover{
@@ -73,4 +73,5 @@ section.register{
 .noty_theme__mint {
     border-radius: 50px!important;
     padding-left: 8px!important;
+    
 }

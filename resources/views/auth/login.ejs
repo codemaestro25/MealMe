@@ -2,27 +2,32 @@
     
   <!-- component -->
 <div class="bg-white shadow-md rounded  px-8 pt-6 pb-8 mb-4 flex flex-col w-1/5">
+  <form action="/login" method="POST">
+  <% if(messages.error){console.log(messages.error);%>
+    <span class="text-red-500 text-sm"><%= messages.error%></span> <!--messages is an inbuilt function of the flash utility which is used to show messgae here the error is the key used to define the flash in our cartController-->
+    <% }%>
     <div class="mb-4">
       <label class="block text-grey-darker text-sm font-bold mb-2" for="email">
         Email
       </label>
-      <input class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" id="email" type="text" placeholder="Enter your email">
+      <input name ="email" class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" id="email" type="text" placeholder="Enter your email">
     </div>
     <div class="mb-6">
       <label class="block text-grey-darker text-sm font-bold mb-2" for="password">
         Password
       </label>
-      <input class="shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker mb-3" id="password" type="password" placeholder="Enter your password">
+      <input name = "password" class="shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker mb-3" id="password" type="password" placeholder="Enter your password">
       <p class="text-red text-xs italic">Password.</p>
     </div>
     <div class="flex items-center justify-between">
-      <button class="btn-primary bg-blue text-white font-bold py-2 px-4 rounded-full">
+      <button type="submit" class="btn-primary bg-blue text-white font-bold py-2 px-4 rounded-full">
         Login   
       </button>
       <a class="inline-block align-baseline font-bold text-sm text-blue" href="/register">
         Dont have account?
       </a>
     </div>
+  </form>
 </div>
 
 </section>
