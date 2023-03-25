@@ -1,0 +1,46 @@
+<section class="orders light-section">
+    <div class="container mx-auto pt-12">
+        <h1 class="font-bold text-lg mb-4">Your Orders </h1>
+        <div id="success-alert" role="alert" class="flex items-center bg-green-500 text-white text-sm font-bold px-4 py-3">
+            Order Placed Successfully
+        </div>
+        <table class="w-full table-auto bg-white">
+            <thead class="border px-4 py-2">
+                <tr>
+                    <th class="px-4 py-2 text-left">Items</th>
+                    <th class="px-4 py-2 text-left">Address</th>
+                    <th class="px-4 py-2 text-left">Time</th>
+                </tr>
+            </thead>
+            <tbody class="border px-4 py-2">
+                <% if(orders.length){ %>
+                     <!--abovewe are checking whether any order exist  -->
+                     <% orders.forEach(order=>{ %>
+                    <tr class="border px-4 py-2">
+                        <td class="border px-4 py-2">
+                          <!-- for extracting name of the pizza -->
+                            <%for(troy in order.items){ const itemObj = order.items[troy];%>
+                                <%for(pizza in itemObj){ const pizzaObj = itemObj[pizza];%>
+                                    <a href="#" class="link"><%= pizzaObj['name']%>
+                                    </a>
+
+                                        
+                                    
+                                <%}%>
+                            <%}%>
+                        </td>
+                        <td class="border px-4 py-2"><%= order.address%></td>
+                        <td class="border px-4 py-2"><%= moment(order.createdAt).format('hh:mm A') %></td>
+                    </tr>
+                    <% }) %>
+
+                <% } else { %>
+                    <tr>
+                        <td class="p-4"> No Orders Found!</td>
+                    </tr>
+                <% }%>
+            </tbody>
+        </table>
+        
+    </div>
+</section>
