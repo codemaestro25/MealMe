@@ -12,7 +12,7 @@ const flash = require('express-flash')
 const MongoDbStore = require('connect-mongo')(session) //here we have written 'M' capital that means it stores a classs and a constructor fucntion , so the '()' here indicates the constrcutor of the recieved class
 // new MongoDbStore(session)
 const passport = require('passport')
-
+const Emitter = require('events');
 
 // database connection
 const url = 'mongodb://127.0.0.1/pizzaApp';
@@ -24,8 +24,13 @@ connection.once('open', function(){
     console.log("Connection to database failed");
 })
 
+// event emitter
+const eventEmitter = new Emitter();
+app.set('eventEmitter', eventEmitter); //binding the event emitter to our app
+
 // passport config
 const passportInit = require('./app/config/passport');
+const { join } = require('path');
 passportInit(passport); 
 // app.use(cookieParser());
 app.use(passport.initialize()); //for initializing the passport
@@ -89,6 +94,25 @@ app.set('view engine', 'ejs')
 require('./routes/web')(app) // here '(app)' this means we are calling the the function initRoutes(app) present in web.js and pass the instance of app which is our express app to the function
 
 
-app.listen(PORT , ()=>{
+const server = app.listen(PORT , ()=>{
     console.log(`Listening on PORT ${PORT}`)
 }) 
+
+// Socket connection
+const io = require('socket.io')(server)
+io.on('connection', (socket)=>{
+    // joining the connected client
+    // console.log(socket.id);
+    socket.on('join', (roomName)=>{
+        socket.join(roomName)
+    })
+})
+
+eventEmitter.on('orderUpdated', (data)=>{
+// the orderID and orderStatus which we have passed from the orderStatusControler will be recieved here in data variable
+    io.to(`order_${data.id}`).emit('orderUpdated', data);
+})
+
+eventEmitter.on('orderPlaced', (data)=>{
+    io.to('adminRoom').emit('orderPlaced', data)
+})

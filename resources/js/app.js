@@ -44,7 +44,7 @@ if(alertMsg){
     }, 2000)
 }
 
-initAdmin();
+
 
 // render order status
 let statuses = document.querySelectorAll('.status_line');
@@ -54,6 +54,12 @@ order = JSON.parse(order); //converted the recieved string from order to object 
 let time = document.createElement('small');
 
 function updateStatus(order){
+    statuses.forEach((statusEle)=>{
+        // for removing the currently applied classes so these classes can be applied according to the updated current status in the later part of the code
+        statusEle.classList.remove('step-completed');
+        statusEle.classList.remove('current-status');
+
+    })
     let stepCompleted = true; //due to this line the first step i.e. the order placed step will get greyyed automatically
     statuses.forEach((statusEle)=>{
         let dataProp = statusEle.dataset.status; // it will contain the data-attribute (data-status) value from the statusOrder,ejs
@@ -72,3 +78,30 @@ function updateStatus(order){
 }
 
 updateStatus(order);
+
+// socket work for client side
+let socket = io()
+initAdmin(socket); // passing the socket element to admin.js
+// joining the client in the private room
+if(order){
+    socket.emit('join', `order_${order._id}`) // we are giving a unique id to the private room so the order id is used here to give the name to the room
+}
+
+// for updating the admin page
+let adminAreaPath = window.location.pathname;
+if(adminAreaPath.includes('admin')){
+    socket.emit('join', 'adminRoom'); //if the url contains admin that means we are accessing an admin page so if thats the case then create a room named 'adminRoom'
+}
+
+socket.on('orderUpdated', (data)=>{ //listening to the event sent from server.js
+   
+    const updatedOrder = { ...order } // ...order means here we  have copied the order object
+    updatedOrder.updatedAt = moment().format();
+    updatedOrder.orderStatus = data.orderStatus;
+    updateStatus(updatedOrder);
+    new Noty({
+        type: 'success',
+        text:"Order Updated",
+        timeout: 1000
+    }).show();
+})

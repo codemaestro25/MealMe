@@ -19,16 +19,21 @@ function orderController(){
              });
 
              order.save().then(result=>{
-                req.flash('success',"Order Placed Successfully!");
-                delete req.session.cart;
-                return res.redirect('/orders');
-             }).catch(err =>{
+                Order.populate(result , {path: 'customerId'}).then((placedOrder)=>{
+                    //populate func for fetching the user object using the customerId, placedOrder contains the complete order along with the name of the user fetched from users collection using the customerId.
+                    req.flash('success',"Order Placed Successfully!");
+                    delete req.session.cart;
+                    // emit the socket event
+                    const eventEmitter = req.app.get('eventEmitter');
+                    eventEmitter.emit('orderPlaced', placedOrder)
+                    return res.redirect('/orders');
+                }).catch(err =>{
                 req.flash('error', "something went wrong");
                 console.log(err);
                 return res.redirect('./cart');
-             })
+             });
+        });
         },
-
         async index(req, res){
             const orders = await Order.find({customerId: req.session.passport.user})
             
@@ -50,7 +55,8 @@ function orderController(){
            }        
 
         }
-    }
+    
+}
 }
 
 module.exports = orderController;

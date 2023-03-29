@@ -1,7 +1,9 @@
 import axios from 'axios';
 import moment from 'moment/moment';
+import Noty from 'noty';
+import order from '../../app/models/order';
 
-export function initAdmin(){
+export function initAdmin(socket){
     const orderTableBody = document.querySelector('#orderTableBody');
     let orders = [];
     let markup ;
@@ -64,5 +66,18 @@ export function initAdmin(){
             `
         }).join('');
     }
+
+    // socket work for updating realtime data
+    socket.on('orderPlaced', (data)=>{
+        new Noty({
+            type: 'success',
+            text: 'New Order Added',
+            timeout: 2000,
+        }).show();
+
+        orders.unshift(data); // data contains the updated order that we recieved from server.js, unshift is the method to add the element in an array at the first position
+        orderTableBody.innerHTML = '' ; // clearing the previous markup
+        orderTableBody.innerHTML = generateMarkup(orders); // generating a new markup with the updated orders
+    })
 }
 

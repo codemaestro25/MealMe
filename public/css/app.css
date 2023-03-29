@@ -247,6 +247,10 @@ body {
   color: #232323;
 }
 
+#logo img {
+  height: 60px;
+}
+
 nav li:last-child a {
   background: #FE5F1E;
 }

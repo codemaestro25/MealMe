@@ -31,6 +31,7 @@
   "noty": "^3.2.0-beta-deprecated",
   "passport": "0.4.1",
   "passport-local": "^1.0.0",
+  "socket.io": "^4.6.1",
   "stream": "^0.0.2",
   "stream-browserify": "^3.0.0"
  },
