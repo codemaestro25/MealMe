@@ -18,6 +18,7 @@ body {
 
 }
 
+
 nav li:last-child a {
     background: $primary;
 }
@@ -187,3 +188,22 @@ section.status{
     
 }
 
+@media(max-width: 1320px){
+    .container{
+        max-width: 90%!important;
+        // tells that when width of the screen will get less than 1060px then reduce the inner containerwidth to max 90%
+    } 
+    #adminOrders table{
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+        // applies scroll only to the table and not the entire page
+
+    }
+}
+@media(max-width:470px){
+    #logo img{
+       height: 30px;
+       width: 30px;
+    }
+}

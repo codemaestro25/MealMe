@@ -425,3 +425,20 @@ section.status {
 .status-box ul li small {
   float: right;
 }
+
+@media (max-width: 1320px) {
+  .container {
+    max-width: 90% !important;
+  }
+  #adminOrders table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
+@media (max-width: 470px) {
+  #logo img {
+    height: 30px;
+    width: 30px;
+  }
+}

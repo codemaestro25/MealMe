@@ -3,7 +3,7 @@
   <div class="container mx-auto flex items-center justify-between">
     <div class="w-1/2">
       <h6 class="text-lg"><em>Isn't it tempting?</em></h6>
-      <h1 class="text-6xl font-bold">Dont Wait</h1>
+      <h1 class="text-3xl md:text-6xl font-bold">Dont Wait</h1>
       <button
         class="btn-primary px-6 py-2 rounded-full text-white font-bold mt-4"
       >
@@ -17,10 +17,10 @@
 </section>
 <section class="menu container mx-auto py-8">
   <h1 class="text-lg font-bold mb-8">Delicious Pizzas</h1>
-  <div class="grid grid-cols-4 gap-16">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-16"> <!--md, lg are tailwind css breakpoint speicifying min-width media query, refer docs-->
     <% pizzas.forEach(function(pizzaitem){%>  <!--ejs template engine tags which is a javascript, pizzaitem here is the iterating variable which contains the data of each pizzaiitem-->
     <div>
-      <div class="w-64 text-center">
+      <div class=" w-full md:w-64 text-center">
         <img
           class="h-40 mb-4 mx-auto"
           src="/img/<%= pizzaitem.image %>"
