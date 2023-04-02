@@ -15,8 +15,8 @@ const passport = require('passport')
 const Emitter = require('events');
 
 // database connection
-const url = 'mongodb://127.0.0.1/pizzaApp';
-mongoose.connect(url,{useNewUrlParser: true, useUnifiedTopology: true});
+
+mongoose.connect(process.env.MONGO_CONNECTION_URL, {useNewUrlParser: true, useUnifiedTopology: true});
 const connection = mongoose.connection;
 connection.once('open', function(){
     console.log("Database Connected")
@@ -92,7 +92,9 @@ app.set('view engine', 'ejs')
 // make sure that all your routes are placed after the above block only , or else it will create render issues
 
 require('./routes/web')(app) // here '(app)' this means we are calling the the function initRoutes(app) present in web.js and pass the instance of app which is our express app to the function
-
+app.use((req, res)=>{
+    res.status(404).render('errors/404')
+})
 
 const server = app.listen(PORT , ()=>{
     console.log(`Listening on PORT ${PORT}`)
